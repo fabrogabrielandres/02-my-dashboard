@@ -1,23 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { Metadata } from "next";
-import Image from "next/image";
-
-export interface GetPokemos {
-  count: number;
-  next: null;
-  previous: null;
-  results: Result[];
-}
-
-export interface Result {
-  name: string;
-  url: string;
-}
-
-export interface SinglePokemon {
-  name: string;
-  id: string;
-}
+import { GetPokemos, SinglePokemon } from "./interfaces";
+import { PokemonsGrid } from "./components";
+import { notFound } from "next/navigation";
 
 
 
@@ -37,29 +22,21 @@ export default async function PokemonsPage() {
       const id = pokemon.url.split("/").at(-2)!;
       return ({ name: pokemon.name, id });
     })
-
+    // throw new Error("No se cargo nada");
+    
+    
     return pokemons
 
   }
 
 
-
   const list = await getPokemons(151);
-
-
-
 
 
   return (
     <div className="flex flex-col">
-      <span>Pokemon  <small>List static</small></span>
-      <div className="flex flex-wrap items-center justify-between">
-        {list.map(pokemon =>
-          <Image key={pokemon.id} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`} alt={pokemon.name} width={100} height={100} />
-
-        )}
-      </div>
-
+      <span className="text-7xl mb-3">Pokemon static<small className="text-5xl"> list</small></span>
+      <PokemonsGrid list={list} />
     </div>
   );
 }

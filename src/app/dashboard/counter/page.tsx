@@ -1,4 +1,4 @@
-import { CartCounter } from "@/app/shopping-cart/CartCounter";
+import { CartCounter } from "@/shopping-cart/CartCounter";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,9 +9,11 @@ export const metadata: Metadata = {
 
 export default function CounterPage() {
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full">
+    <div className="flex flex-col justify-center items-center  w-full h-full">
+
       <span>Products on Car</span>
       <CartCounter />
+
     </div>
 
   );
