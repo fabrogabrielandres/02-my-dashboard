@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Pokemon } from "../interfaces";
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 
 
 interface Props {
@@ -20,8 +20,15 @@ const getPokemon = async (id: string): Promise<Pokemon> => {
   } catch (error) {
     notFound();
   }
-
 }
+
+export async function generateStaticParams() {
+  const createArrayWithValueConsecutives = Array.from({ length: 150 }).map((v, index) => `${index + 1}`)
+  const static151pokemons = createArrayWithValueConsecutives.map(v => ({ id: v }))
+
+  return static151pokemons
+}
+
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id, name } = await getPokemon(params.id);
