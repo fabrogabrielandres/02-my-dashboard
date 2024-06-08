@@ -29,7 +29,7 @@ const sidebar: Array<Props> = [
         icon: <CiGrid41 />
     },
     {
-        path: "/dashboard/pokemons",
+        path: "/dashboard/pokemon",
         title: "pokemons",
         subtitle: "Page pokemons",
         icon: <MdCatchingPokemon />
