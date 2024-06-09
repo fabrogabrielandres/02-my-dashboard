@@ -19,7 +19,7 @@ export const PokemonCart = ({ pokemon }: Props) => {
                     {/* <p className="text-sm text-gray-100">{name}</p> */}
                     <div className="mt-5">
                         <Link
-                            href={`pokemon/${id}`}
+                            href={`pokemon/${name}`}
                             className="border rounded-full py-2 px-4 text-xs font-semibold text-gray-100"
                         >
                             More information
