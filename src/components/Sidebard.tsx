@@ -4,7 +4,7 @@ import { RiDatabase2Line } from "react-icons/ri";
 import { SidebarMenuItem } from "./SidebarMenuItem";
 import { CiGrid41 } from "react-icons/ci";
 import { MdCatchingPokemon } from "react-icons/md";
-import Link from "next/link";
+import { PiStarThin } from "react-icons/pi";
 
 
 
@@ -33,6 +33,12 @@ const sidebar: Array<Props> = [
         title: "pokemons",
         subtitle: "Page pokemons",
         icon: <MdCatchingPokemon />
+    },
+    {
+        path: "/dashboard/favorites",
+        title: "favorites",
+        subtitle: "Page favorites pokemons",
+        icon: <PiStarThin />
     }
 ]
 
