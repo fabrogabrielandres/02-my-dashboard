@@ -1,3 +1,4 @@
-export  * from "./SimpleWidget";
-export * from "./SidebarMenuItem";
-export * from "./Sidebard";
+export * from "./Dashboard/WidgetsGrids";
+export * from "./Dashboard/SimpleWidget";
+export * from "./Sidebar/SidebarMenuItem";
+export * from "./Sidebar/Sidebard";

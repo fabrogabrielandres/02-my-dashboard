@@ -7,14 +7,19 @@ export const metadata: Metadata = {
 };
 
 
-export default function CounterPage() {
+
+export default async function CounterPage() {
+
+
   return (
     <div className="flex flex-col justify-center items-center  w-full h-full">
 
       <span>Products on Car</span>
-      <CartCounter />
+
+      <CartCounter value={15} />
 
     </div>
 
   );
-}   
+}
+
