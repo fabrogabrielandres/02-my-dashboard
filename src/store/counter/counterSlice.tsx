@@ -1,20 +1,20 @@
 import { create, type StateCreator } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-interface CounterActions {
+export interface CounterActions {
   addOne: () => void
   dereaseOne: () => void
   resetCount: (by: number) => void
   initCounterState: (initValue: number) => void
 }
 
-interface CounterState {
+export interface CounterState {
   counter: number
   isReady: boolean
 }
 
 
-const counterSlice: StateCreator<(CounterActions & CounterState), [["zustand/devtools", never]]> = ((set, get) => ({
+export const counterSlice: StateCreator<(CounterActions & CounterState), [["zustand/devtools", never]]> = ((set, get) => ({
   counter: 5,
   isReady: false,
   addOne: () => set((state) => ({ counter: state.counter + 1 }), false, "addOne"),
@@ -28,6 +28,6 @@ const counterSlice: StateCreator<(CounterActions & CounterState), [["zustand/dev
 }))
 
 
-export const useCounterStore = create<CounterActions & CounterState>()(devtools(
+export const useCounterStore = create<CounterActions & CounterState>()(
   counterSlice
-));
+);
