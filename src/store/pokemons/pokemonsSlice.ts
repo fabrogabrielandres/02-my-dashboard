@@ -3,7 +3,19 @@ import { create, type StateCreator } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 const initialState: PokemonsFavorite = {
-    "9": { id: "9", name: "hola" },
+    '1': {
+        name: 'bulbasaur',
+        id: '1'
+    },
+    '2': {
+        name: 'ivysaur',
+        id: '2'
+    },
+    '3': {
+        name: 'venusaur',
+        id: '3'
+    }
+
 }
 
 export interface PokemonsActions {
@@ -15,22 +27,22 @@ export interface PokemonsFavorite {
 }
 
 export interface PokemonsFavoriteState {
-    isFavorite: PokemonsFavorite
+    listFavorite: PokemonsFavorite
 }
 
 type PokemonSlice = PokemonsActions & PokemonsFavoriteState;
 
 export const pokemonSlice: StateCreator<(PokemonsActions & PokemonsFavoriteState), [["zustand/devtools", never]]> = ((set, get) => ({
-    isFavorite: initialState,
+    listFavorite: initialState,
     toggleFavorite: (pokemon: SinglePokemon) => {
         set((state) => {
             const { id, name } = pokemon;
-            const allFavorite = get().isFavorite;
+            const allFavorite = get().listFavorite;
             if (!!allFavorite[id]) {
                 const { [id]: Todelete, ...rest } = allFavorite;
-                return ({ isFavorite: rest })
+                return ({ listFavorite: rest })
             }
-            return ({ isFavorite: { ...state.isFavorite, [id]: { name: name, id: id } } })
+            return ({ listFavorite: { ...state.listFavorite, [id]: { name: name, id: id } } })
         }, false, "toggleFavorite")
     }
 }))

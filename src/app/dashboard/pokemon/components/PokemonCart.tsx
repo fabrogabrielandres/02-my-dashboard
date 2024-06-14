@@ -12,7 +12,7 @@ interface Props {
 export const PokemonCart = ({ pokemon }: Props) => {
     const { id, name } = pokemon;
 
-    const isFavorite = usePokemonStore().isFavorite[id]
+    const listFavorite = usePokemonStore().listFavorite[id]
     const { toggleFavorite } = usePokemonStore()
 
 
@@ -36,7 +36,7 @@ export const PokemonCart = ({ pokemon }: Props) => {
                 <div className="border-b">
                     <div className="px-4 py-2 hover:bg-gray-100 flex items-center justify-center" >
                         <div onClick={() => toggleFavorite!(pokemon)} className="text-red-600 cursor-pointer" >
-                            {!!isFavorite ? <IoHeart /> : <IoHeartOutline />}
+                            {!!listFavorite ? <IoHeart /> : <IoHeartOutline />}
                         </div>
                         <div className="pl-3 flex flex-col items-center justify-center">
                             <p className="text-sm font-medium text-gray-800 leading-none">

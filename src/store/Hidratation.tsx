@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from 'zustand/middleware';
 import { CounterActions, CounterState, useCounterStore, counterSlice } from "./counter/counterSlice";
 import { PokemonsActions, PokemonsFavoriteState, pokemonSlice, usePokemonStore } from "./pokemons/pokemonsSlice";
 import { create } from "zustand";
@@ -19,11 +19,12 @@ export const useWeddingBoundStore = create<ShareState>()(
 
 
 
+
 const Hydration = () => {
     React.useEffect(() => {
-        useWeddingBoundStore
-        // useCounterStore;
-        // usePokemonStore;
+        // useWeddingBoundStore.persist.rehydrate();
+        useCounterStore.persist.rehydrate();
+        usePokemonStore.persist.rehydrate();
 
     }, []);
 
