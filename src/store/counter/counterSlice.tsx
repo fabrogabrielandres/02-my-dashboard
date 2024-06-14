@@ -29,5 +29,7 @@ export const counterSlice: StateCreator<(CounterActions & CounterState), [["zust
 
 
 export const useCounterStore = create<CounterActions & CounterState>()(
-  counterSlice
+  devtools(
+    counterSlice
+  )
 );

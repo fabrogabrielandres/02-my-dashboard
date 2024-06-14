@@ -2,14 +2,12 @@ import { SinglePokemon } from "@/app/dashboard/pokemon/interfaces";
 import { create, type StateCreator } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-export interface PokemonsActions {
-
-}
 const initialState: PokemonsFavorite = {
-    "10": { id: "50", name: "hola" },
-    "11": { id: "10", name: "hola" },
-    "12": { id: "10", name: "hola" },
-    "13": { id: "10", name: "hola" }
+    "9": { id: "9", name: "hola" },
+}
+
+export interface PokemonsActions {
+    toggleFavorite?: (singlePokemon: SinglePokemon) => void
 }
 
 export interface PokemonsFavorite {
@@ -17,17 +15,35 @@ export interface PokemonsFavorite {
 }
 
 export interface PokemonsFavoriteState {
-    initialState: PokemonsFavorite
+    isFavorite: PokemonsFavorite
 }
 
-
+type PokemonSlice = PokemonsActions & PokemonsFavoriteState;
 
 export const pokemonSlice: StateCreator<(PokemonsActions & PokemonsFavoriteState), [["zustand/devtools", never]]> = ((set, get) => ({
-    initialState
-})
-)
+    isFavorite: initialState,
+    toggleFavorite: (pokemon: SinglePokemon) => {
+        set((state) => {
+            const { id, name } = pokemon;
+            const allFavorite = get().isFavorite;
+            if (!!allFavorite[id]) {
+                const { [id]: Todelete, ...rest } = allFavorite;
+                return ({ isFavorite: rest })
+            }
+            return ({ isFavorite: { ...state.isFavorite, [id]: { name: name, id: id } } })
+        }, false, "toggleFavorite")
+    }
+}))
+
 
 
 export const usePokemonStore = create<PokemonsActions & PokemonsFavoriteState>()(
-    pokemonSlice
+    devtools(
+        persist(
+            pokemonSlice,
+            {
+                name: "pokemonSlice"
+            }
+        )
+    )
 );

@@ -1,7 +1,9 @@
+"use client"
 import Image from "next/image";
 import Link from 'next/link';
 import { SinglePokemon } from '../interfaces';
-import { IoHeartOutline } from "react-icons/io5";
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
+import { PokemonsFavorite, usePokemonStore } from "@/store/pokemons/pokemonsSlice";
 
 interface Props {
     pokemon: SinglePokemon
@@ -9,6 +11,11 @@ interface Props {
 
 export const PokemonCart = ({ pokemon }: Props) => {
     const { id, name } = pokemon;
+
+    const isFavorite = usePokemonStore().isFavorite[id]
+    const { toggleFavorite } = usePokemonStore()
+
+
     return (
         <div className="mx-auto right-0 mt-2 w-60">
             <div className="flex flex-col bg-white rounded overflow-hidden shadow-lg">
@@ -27,10 +34,9 @@ export const PokemonCart = ({ pokemon }: Props) => {
                     </div>
                 </div>
                 <div className="border-b">
-                    <Link href="/dashboard/main" className="px-4 py-2 hover:bg-gray-100 flex items-center justify-center" >
-
-                        <div className="text-red-600">
-                            <IoHeartOutline></IoHeartOutline>
+                    <div className="px-4 py-2 hover:bg-gray-100 flex items-center justify-center" >
+                        <div onClick={() => toggleFavorite!(pokemon)} className="text-red-600 cursor-pointer" >
+                            {!!isFavorite ? <IoHeart /> : <IoHeartOutline />}
                         </div>
                         <div className="pl-3 flex flex-col items-center justify-center">
                             <p className="text-sm font-medium text-gray-800 leading-none">
@@ -38,7 +44,7 @@ export const PokemonCart = ({ pokemon }: Props) => {
                             </p>
                             <p className="text-xs text-gray-500">View your campaigns</p>
                         </div>
-                    </Link>
+                    </div>
                 </div>
             </div>
         </div>

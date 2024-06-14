@@ -3,7 +3,7 @@
 import * as React from "react";
 import { devtools } from "zustand/middleware";
 import { CounterActions, CounterState, useCounterStore, counterSlice } from "./counter/counterSlice";
-import { PokemonsActions, PokemonsFavoriteState, pokemonSlice } from "./pokemons/pokemonsSlice";
+import { PokemonsActions, PokemonsFavoriteState, pokemonSlice, usePokemonStore } from "./pokemons/pokemonsSlice";
 import { create } from "zustand";
 
 
@@ -11,11 +11,10 @@ import { create } from "zustand";
 type ShareState = PokemonsActions & PokemonsFavoriteState & CounterActions & CounterState;
 
 export const useWeddingBoundStore = create<ShareState>()(
-    devtools((...a) => ({
+    (...a) => ({
         ...counterSlice(...a),
-        ...pokemonSlice(...a)
-    })),
-
+        ...pokemonSlice(...a),
+    })
 );
 
 
@@ -23,7 +22,9 @@ export const useWeddingBoundStore = create<ShareState>()(
 const Hydration = () => {
     React.useEffect(() => {
         useWeddingBoundStore
-        // useCounterStore.persist.rehydrate();
+        // useCounterStore;
+        // usePokemonStore;
+
     }, []);
 
     return null;
